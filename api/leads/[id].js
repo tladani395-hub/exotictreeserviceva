@@ -5,7 +5,7 @@ module.exports = (req, res) => {
   res.setHeader('Access-Control-Allow-Methods', 'GET, PATCH, DELETE, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
-  if (req.method === 'OPTIONS') {
+  if (req.method === 'OPTIONS' || req.method === 'HEAD') {
     return res.status(200).end();
   }
 
