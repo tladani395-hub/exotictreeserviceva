@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>Exotic Tree Service VA | #1 Tree Removal & Certified Arborists in Virginia</title>
+  <meta name="description" content="Virginia's top-rated tree removal, crane-assisted hazard clearing, trimming, and stump grinding. ISA Certified, $2M Insured. Get an instant quote or call 24/7.">
+  
+  <!-- Favicon / Logo -->
+  <link rel="icon" type="image/webp" href="assets/logo.webp">
+  
+  <!-- CSS Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+  
+  <!-- Three.js 3D Engine -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body class="theme-emerald">
+
+  <!-- ================= TOP ANNOUNCEMENT & HOTLINE BAR ================= -->
+  <div class="top-bar">
+    <div class="container top-bar-content">
+      <div class="top-bar-left">
+        <span class="badge-tag">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+          VA DPOR Licensed #2705-189204
+        </span>
+        <span class="badge-tag">🛡️ $2,000,000 Liability Insured</span>
+        <span>📍 Serving Northern VA, Richmond Metro & Hampton Roads</span>
+      </div>
+      <div class="top-bar-right">
+        <span>Arborist Hotline:</span>
+        <a href="tel:7039918733" class="top-phone-link" aria-label="Call Exotic Tree Service VA">
+          📞 (703) 991-TREE (8733)
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= SITE HEADER & NAVIGATION ================= -->
+  <header class="site-header">
+    <div class="container nav-wrapper">
+      <a href="index.html" class="brand-logo-wrap" aria-label="Exotic Tree Service VA Home">
+        <img src="assets/logo.webp" alt="Exotic Tree Service VA Logo" class="brand-logo-img">
+        <div class="brand-text">
+          <div class="brand-title">EXOTIC TREE <span>SERVICE VA</span></div>
+          <div class="brand-sub">ISA Certified Arborist Specialists</div>
+        </div>
+      </a>
+
+      <!-- Desktop & Mobile Navigation Menu -->
+      <nav>
+        <ul class="nav-menu">
+          <li><a href="tree-removal.html" class="nav-link" style="color: var(--brand-gold); font-weight: 800;">🪓 Tree Removal</a></li>
+          <li><a href="tree-trimming.html" class="nav-link" style="color: var(--brand-green-light); font-weight: 800;">✂️ Tree Trimming</a></li>
+          <li><a href="#services" class="nav-link">All Services</a></li>
+          <li><a href="#calculator" class="nav-link">Cost Calculator</a></li>
+          <li><a href="#why-us" class="nav-link">Why We Dominate</a></li>
+          <li><a href="portal.html" class="nav-link" style="color: var(--brand-gold);">📋 Staff Portal</a></li>
+        </ul>
+      </nav>
+
+      <!-- Nav Actions & Dual Theme Switcher -->
+      <div class="nav-actions">
+        <!-- Dual Color Background Switcher (Requested by User) -->
+        <button class="theme-toggle-btn" title="Toggle Background Theme (Emerald Eco vs Midnight Onyx)">
+          🎨 <span class="theme-label-text">Theme Switch</span>
+        </button>
+
+        <!-- Switch to Landing Page 2 (24/7 Emergency Storm Page) -->
+        <a href="emergency.html" class="btn btn-emergency btn-sm" title="Go to Emergency Storm Damage Response Page">
+          ⚡ 24/7 Emergency
+        </a>
+
+        <!-- Clickable Direct Phone Call -->
+        <a href="tel:7039918733" class="btn btn-primary btn-sm" style="display: none; @media(min-width: 600px){display: inline-flex;}">
+          📞 (703) 991-TREE
+        </a>
+
+        <button class="mobile-nav-toggle" aria-label="Open mobile menu">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ================= DEDICATED SERVICE PAGES CALLOUT BAR ================= -->
+  <div style="background: rgba(0, 0, 0, 0.45); border-bottom: 1px solid var(--border-color); padding: 0.65rem 0; position: relative; z-index: 990;">
+    <div class="container" style="display: flex; justify-content: center; align-items: center; gap: 0.85rem; flex-wrap: wrap;">
+      <span style="font-weight: 800; font-size: 0.82rem; color: var(--brand-gold); text-transform: uppercase; letter-spacing: 0.05em;">
+        ⭐ OUR TWO DEDICATED SERVICE PAGES:
+      </span>
+      <a href="tree-removal.html" class="btn btn-primary btn-sm" style="font-size: 0.82rem; padding: 0.35rem 0.9rem;">
+        🪓 Page 1: Hazardous Tree Removal →
+      </a>
+      <a href="tree-trimming.html" class="btn btn-green btn-sm" style="font-size: 0.82rem; padding: 0.35rem 0.9rem;">
+        ✂️ Page 2: Tree Trimming & Pruning →
+      </a>
+      <a href="emergency.html" class="btn btn-emergency btn-sm" style="font-size: 0.82rem; padding: 0.35rem 0.9rem;">
+        ⚡ 24/7 Emergency Storm Dispatch →
+      </a>
+    </div>
+  </div>
+
+  <!-- ================= HERO SECTION WITH 3D TREE CANOPY ================= -->
+  <section class="hero-section">
+    <!-- 3D Interactive Three.js Canvas -->
+    <canvas id="three-tree-canvas"></canvas>
+
+    <div class="container hero-content-wrap">
+      <!-- Left Column: High-Impact Copy -->
+      <div class="hero-text-col">
+        <div class="hero-badge-pill">
+          🌲 Virginia's Premier Exotic & Hazardous Tree Care Specialists
+        </div>
+        <h1 class="hero-title">
+          Tree Care Done Right.<br>
+          <span class="highlight">Hazardous Trees Removed</span> Without A Trace.
+        </h1>
+        <p class="hero-subtitle">
+          Don't risk property damage with uninsured competitors. We deploy in-house 75-foot cranes, ISA Certified Arborists, and zero-yard-rut turf protection systems across Northern Virginia and Richmond.
+        </p>
+
+        <div class="trust-pill-group">
+          <div class="trust-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12L3.41 13.41L9 19L21 7L19.59 5.59L9 16.17Z"/></svg>
+            ISA Certified Arborist #PR-5921A
+          </div>
+          <div class="trust-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12L3.41 13.41L9 19L21 7L19.59 5.59L9 16.17Z"/></svg>
+            Zero Yard Damage Guarantee
+          </div>
+          <div class="trust-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12L3.41 13.41L9 19L21 7L19.59 5.59L9 16.17Z"/></svg>
+            60-Min Emergency Response
+          </div>
+          <div class="trust-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12L3.41 13.41L9 19L21 7L19.59 5.59L9 16.17Z"/></svg>
+            $0 Out-of-Pocket Insurance Billing
+          </div>
+        </div>
+
+        <div class="hero-cta-group">
+          <a href="#calculator" class="btn btn-primary btn-lg">
+            ⚡ Calculate Instant Estimate
+          </a>
+          <a href="tel:7039918733" class="btn btn-outline btn-lg">
+            📞 Call Arborist: (703) 991-8733
+          </a>
+        </div>
+      </div>
+
+      <!-- Right Column: Interactive 5-Step Estimate Quiz Funnel (Client Site Type) -->
+      <div class="hero-form-col">
+        <div class="lead-card" id="lead-form-anchor">
+          
+          <!-- Client Trust Badges -->
+          <div style="display: flex; justify-content: space-between; font-size: 0.72rem; font-weight: 800; color: var(--brand-green-light); border-bottom: 1px solid var(--border-color); padding-bottom: 0.6rem; margin-bottom: 1rem; text-transform: uppercase;">
+            <span>✓ Quality Guarantee</span>
+            <span>✓ No Hidden Fees</span>
+            <span>✓ Fast Quotes</span>
+            <span>✓ Licensed & Insured</span>
+          </div>
+
+          <div class="lead-card-header">
+            <h3 class="lead-card-title">Get a FREE Instant Tree Cutting Estimate</h3>
+            <p class="lead-card-sub">Fast 60-second questionnaire for instant arborist dispatch & pricing.</p>
+          </div>
+
+          <!-- Progress Bar -->
+          <div class="quiz-progress-bar-wrap">
+            <div class="quiz-progress-fill" id="quiz-progress"></div>
+          </div>
+
+          <form id="quiz-lead-form" class="ajax-lead-form" data-page-name="5-Step Estimate Quiz">
+            
+            <!-- STEP 1 -->
+            <div class="quiz-step active" data-step="1">
+              <div class="quiz-step-header">
+                <span class="quiz-step-indicator">Question 1 of 5</span>
+              </div>
+              <p style="font-weight: 700; font-size: 1.05rem; margin-bottom: 1rem;">
+                Is your project located in Richmond, Northern Virginia, or within a 60-minute drive?
+              </p>
+              <div class="quiz-option-grid">
+                <button type="button" class="quiz-option-btn" data-field="location_ok" data-val="Yes" onclick="selectQuizOption(this, 1)">
+                  <span>📍</span> Yes, my property is located within 60 minutes in Virginia
+                </button>
+                <button type="button" class="quiz-option-btn" data-field="location_ok" data-val="No" onclick="selectQuizOption(this, 1)">
+                  <span>🗺️</span> No, outside the Virginia primary zone
+                </button>
+              </div>
+            </div>
+
+            <!-- STEP 2 -->
+            <div class="quiz-step" data-step="2">
+              <div class="quiz-step-header">
+                <span class="quiz-step-indicator">Question 2 of 5</span>
+              </div>
+              <p style="font-weight: 700; font-size: 1.05rem; margin-bottom: 0.85rem;">
+                What best describes your tree service situation?
+              </p>
+              <div class="quiz-option-grid grid-2">
+                <button type="button" class="quiz-option-btn" data-field="service" data-val="Tree Removal" onclick="selectQuizOption(this, 2)">
+                  <span>🌳</span> Tree Removal
+                </button>
+                <button type="button" class="quiz-option-btn" data-field="service" data-val="Tree Trimming / Pruning" onclick="selectQuizOption(this, 2)">
+                  <span>🌲</span> Trimming / Pruning
+                </button>
+                <button type="button" class="quiz-option-btn" data-field="service" data-val="Stump Grinding / Removal" onclick="selectQuizOption(this, 2)">
+                  <span>🪵</span> Stump Grinding
+                </button>
+                <button type="button" class="quiz-option-btn" data-field="service" data-val="Yard Cleanup / Storm Debris" onclick="selectQuizOption(this, 2)">
+                  <span>🧹</span> Storm Cleanup
+                </button>
+                <button type="button" class="quiz-option-btn" data-field="service" data-val="Crane-Assisted Removal" onclick="selectQuizOption(this, 2)">
+                  <span>🏗️</span> Crane Extraction
+                </button>
+                <button type="button" class="quiz-option-btn" data-field="service" data-val="Not Sure / Need Expert Advice" onclick="selectQuizOption(this, 2)">
+                  <span>❓</span> Need Advice
+                </button>
+              </div>
+              <div class="quiz-nav-btns">
+                <button type="button" class="btn btn-outline btn-sm" onclick="goToQuizStep(1)">← Back</button>
+              </div>
+            </div>
+
+            <!-- STEP 3 -->
+            <div class="quiz-step" data-step="3">
+              <div class="quiz-step-header">
+                <span class="quiz-step-indicator">Question 3 of 5</span>
+              </div>
+              <p style="font-weight: 700; font-size: 1.05rem; margin-bottom: 0.85rem;">
+                How many trees do you need removed or trimmed?
+              </p>
+              <div class="quiz-option-grid">
+                <button type="button" class="quiz-option-btn" data-field="tree_count" data-val="1-5 trees" onclick="selectQuizOption(this, 3)">
+                  <span>🌿</span> 1–5 trees
+                </button>
+                <button type="button" class="quiz-option-btn" data-field="tree_count" data-val="6-10 trees" onclick="selectQuizOption(this, 3)">
+                  <span>🌲</span> 6–10 trees
+                </button>
+                <button type="button" class="quiz-option-btn" data-field="tree_count" data-val="11-20+ trees" onclick="selectQuizOption(this, 3)">
+                  <span>🌳</span> 11–20+ trees (Large Property / Lot)
+                </button>
+                <button type="button" class="quiz-option-btn" data-field="tree_count" data-val="Not sure / Need an estimate" onclick="selectQuizOption(this, 3)">
+                  <span>❓</span> Not sure / Need an arborist estimate
+                </button>
+              </div>
+              <div class="quiz-nav-btns">
+                <button type="button" class="btn btn-outline btn-sm" onclick="goToQuizStep(2)">← Back</button>
+              </div>
+            </div>
+
+            <!-- STEP 4 -->
+            <div class="quiz-step" data-step="4">
+              <div class="quiz-step-header">
+                <span class="quiz-step-indicator">Question 4 of 5</span>
+              </div>
+              <p style="font-weight: 700; font-size: 1.05rem; margin-bottom: 0.85rem;">
+                What is the property address of this project?
+              </p>
+              <div class="form-group">
+                <label class="form-label">Virginia Street Address & City</label>
+                <input type="text" id="quiz-address" name="address" class="form-control" placeholder="e.g. 2408 Monument Ave, Richmond, VA" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Gate code / Backyard access notes (optional)</label>
+                <input type="text" id="quiz-access" class="form-control" placeholder="e.g. 6-foot wooden gate, alley access">
+              </div>
+              <div class="quiz-nav-btns">
+                <button type="button" class="btn btn-outline btn-sm" onclick="goToQuizStep(3)">← Back</button>
+                <button type="button" class="btn btn-primary btn-sm" onclick="validateStep4()">Next: Contact Details →</button>
+              </div>
+            </div>
+
+            <!-- STEP 5 -->
+            <div class="quiz-step" data-step="5">
+              <div class="quiz-step-header">
+                <span class="quiz-step-indicator">Question 5 of 5 — Final Step</span>
+              </div>
+              <p style="font-weight: 700; font-size: 1.05rem; margin-bottom: 0.85rem;">
+                Where should we send your official written estimate?
+              </p>
+              <div class="form-group">
+                <label class="form-label">Full Name *</label>
+                <input type="text" id="quiz-name" name="name" class="form-control" placeholder="John Miller" required>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label">Cell Phone (For SMS/Call Estimate) *</label>
+                  <input type="tel" id="quiz-phone" name="phone" class="form-control" placeholder="(804) 000-0000" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Email Address</label>
+                  <input type="email" id="quiz-email" name="email" class="form-control" placeholder="john@domain.com">
+                </div>
+              </div>
+
+              <!-- Hidden input storage for answers -->
+              <input type="hidden" name="service" id="quiz-hidden-service" value="Tree Removal">
+              <input type="hidden" name="urgency" value="Fast Online Estimate">
+              <input type="hidden" name="treeDiameter" id="quiz-hidden-trees" value="1-5 trees">
+              <input type="hidden" name="notes" id="quiz-hidden-notes" value="">
+
+              <div class="quiz-nav-btns">
+                <button type="button" class="btn btn-outline btn-sm" onclick="goToQuizStep(4)">← Back</button>
+                <button type="submit" class="btn btn-green btn-lg" style="flex: 1;">
+                  🚀 GET MY FREE INSTANT ESTIMATE
+                </button>
+              </div>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= INTERACTIVE INSTANT ESTIMATE CALCULATOR ================= -->
+  <section class="section-py section-darker" id="calculator">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Instant Pricing Transparency</span>
+        <h2 class="section-title">Tree Service Cost Calculator</h2>
+        <p class="section-desc">
+          Stop waiting days for callbacks. Get an immediate ballpark estimate based on trunk diameter, hazard proximity, and service type.
+        </p>
+      </div>
+
+      <div class="calc-box">
+        <div class="calc-controls">
+          <div class="form-group">
+            <label class="form-label" style="font-size: 1rem;">1. Select Required Tree Service</label>
+            <select id="calc-service" class="form-control" style="font-size: 1.05rem; padding: 0.85rem;">
+              <option value="Standard Tree Removal">Standard Hazardous Tree Removal</option>
+              <option value="Crane-Assisted Removal">Crane-Assisted Removal (Over Roofs/Lines)</option>
+              <option value="Trimming & Pruning">Tree Trimming & Canopy Shaping</option>
+              <option value="Stump Grinding">Stump Grinding & Root Extraction</option>
+              <option value="Emergency Tree Removal">Urgent Storm Emergency Removal</option>
+              <option value="Storm Cleanup & Debris">Storm Cleanup & Chipping</option>
+            </select>
+          </div>
+
+          <div class="slider-wrap">
+            <div class="slider-val-display">
+              <span>2. Estimated Trunk Diameter:</span>
+              <span id="calc-diameter-val">24" Trunk (Large Mature Tree)</span>
+            </div>
+            <input type="range" id="calc-diameter" min="8" max="60" value="24" step="2">
+            <div style="display:flex; justify-content:space-between; font-size:0.75rem; color:var(--text-muted);">
+              <span>8" (Sapling/Small)</span>
+              <span>24" (Medium-Large)</span>
+              <span>40" (Huge Oak/Pine)</span>
+              <span>60"+ (Heritage Canopy)</span>
+            </div>
+          </div>
+
+          <div>
+            <label class="form-label" style="font-size: 1rem; margin-bottom: 0.65rem;">3. Tree Location & Proximity Hazard</label>
+            <div class="calc-options-grid">
+              <label class="calc-radio-card">
+                <input type="radio" name="proximity" value="open-lawn" checked>
+                <div class="calc-radio-label">
+                  <span style="font-size: 1.4rem;">🏡</span>
+                  <span>Open Yard (Easy Rig)</span>
+                </div>
+              </label>
+              <label class="calc-radio-card">
+                <input type="radio" name="proximity" value="near-structure">
+                <div class="calc-radio-label">
+                  <span style="font-size: 1.4rem;">🏠</span>
+                  <span>Near House/Deck</span>
+                </div>
+              </label>
+              <label class="calc-radio-card">
+                <input type="radio" name="proximity" value="near-powerlines">
+                <div class="calc-radio-label">
+                  <span style="font-size: 1.4rem;">⚡</span>
+                  <span>Near Powerlines</span>
+                </div>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="calc-output-card">
+          <div class="calc-price-lead">Estimated Price Range</div>
+          <div class="calc-price-val" id="calc-price-output">$750 - $1,350</div>
+          <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1.5rem;">
+            Includes full safety rigging, professional cutting, log breakdown, wood chipping, and thorough cleanup. Zero lawn damage.
+          </p>
+          <button id="btn-lock-quote" class="btn btn-primary btn-lg" style="width: 100%;">
+            🔒 Lock In This Estimate
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CORE TREE CARE SERVICES ================= -->
+  <section class="section-py" id="services">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Full-Spectrum Arboricultural Care</span>
+        <h2 class="section-title">Engineered For Safety & Aesthetics</h2>
+        <p class="section-desc">
+          From complex crane extractions over multi-million dollar Virginia estates to precision crown thinning.
+        </p>
+      </div>
+
+      <div class="services-grid">
+        <!-- Service 1 -->
+        <div class="service-card">
+          <div>
+            <div class="service-icon-box">🪓</div>
+            <h3 class="service-title">Hazardous Tree Removal</h3>
+            <p class="service-text">
+              Dead, diseased, leaning, or rotted trees removed with surgical precision. We use advanced zero-impact rigging to ensure gutters, fences, and lawns are untouched.
+            </p>
+            <ul class="service-features">
+              <li><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12L3.41 13.41L9 19L21 7L19.59 5.59L9 16.17Z"/></svg> ISA Certified safety protocols</li>
+              <li><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12L3.41 13.41L9 19L21 7L19.59 5.59L9 16.17Z"/></svg> Ground-protection mats on every job</li>
+              <li><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12L3.41 13.41L9 19L21 7L19.59 5.59L9 16.17Z"/></svg> Full debris chipping & rake cleanup</li>
+            </ul>
+          </div>
+          <a href="tree-removal.html" class="btn btn-primary btn-sm" style="width: 100%; margin-top: 0.5rem;">
+            🪓 Open Tree Removal Dedicated Landing Page →
+          </a>
+        </div>
+
+        <!-- Service 2 -->
+        <div class="service-card">
+          <div>
+            <div class="service-icon-box">🏗️</div>
+            <h3 class="service-title">Crane-Assisted Tree Service</h3>
+            <p class="service-text">
+              Our in-house 75-ton crane allows us to lift massive sections over houses, pools, and power lines without ever touching your lawn or driveway.
+            </p>
+            <ul class="service-features">
+              <li><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12L3.41 13.41L9 19L21 7L19.59 5.59L9 16.17Z"/></svg> In-house equipment (no rental delays)</li>
+              <li><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12L3.41 13.41L9 19L21 7L19.59 5.59L9 16.17Z"/></svg> Ideal for tight-quarter residential lots</li>
+              <li><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12L3.41 13.41L9 19L21 7L19.59 5.59L9 16.17Z"/></svg> Eliminates damage to roofs and landscape</li>
+            </ul>
+          </div>
+          <a href="#lead-form-anchor" class="btn btn-outline btn-sm">Inquire Crane Service →</a>
+        </div>
+
+        <!-- Service 3 -->
+        <div class="service-card">
+          <div>
+            <div class="service-icon-box">✂️</div>
+            <h3 class="service-title">Precision Tree Trimming & Pruning</h3>
+            <p class="service-text">
+              Proper structural pruning improves tree health, prevents storm failure, elevates canopies for sunlight, and protects roofs from moss and pests.
+            </p>
+            <ul class="service-features">
+              <li><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12L3.41 13.41L9 19L21 7L19.59 5.59L9 16.17Z"/></svg> ANSI A300 pruning standards</li>
+              <li><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12L3.41 13.41L9 19L21 7L19.59 5.59L9 16.17Z"/></svg> Crown deadwood extraction</li>
+              <li><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12L3.41 13.41L9 19L21 7L19.59 5.59L9 16.17Z"/></svg> Canopy elevation for sunlight</li>
+            </ul>
+          </div>
+          <a href="tree-trimming.html" class="btn btn-green btn-sm" style="width: 100%; margin-top: 0.5rem;">
+            ✂️ Open Tree Trimming Dedicated Landing Page →
+          </a>
+        </div>
+
+        <!-- Service 4 -->
+        <div class="service-card">
+          <div>
+            <div class="service-icon-box">🪵</div>
+            <h3 class="service-title">Deep Stump Grinding & Root Removal</h3>
+            <p class="service-text">
+              Eliminate unsightly tripping hazards and termite-attracting stumps. We grind 8-12 inches below ground level so you can plant fresh grass or flowers immediately.
+            </p>
+            <ul class="service-features">
+              <li><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12L3.41 13.41L9 19L21 7L19.59 5.59L9 16.17Z"/></svg> Complete subterranean grinding</li>
+              <li><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12L3.41 13.41L9 19L21 7L19.59 5.59L9 16.17Z"/></svg> Free rich wood mulch backfill</li>
+              <li><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12L3.41 13.41L9 19L21 7L19.59 5.59L9 16.17Z"/></svg> Surface root tracing and removal</li>
+            </ul>
+          </div>
+          <a href="#lead-form-anchor" class="btn btn-outline btn-sm">Get Stump Quote →</a>
+        </div>
+
+        <!-- Service 5 -->
+        <div class="service-card">
+          <div>
+            <div class="service-icon-box">🚨</div>
+            <h3 class="service-title">24/7 Emergency Storm Response</h3>
+            <p class="service-text">
+              Fallen trees on houses, blocked driveways, or hanging limbs after high winds. Crews dispatched 24 hours a day with insurance claim assistance.
+            </p>
+            <ul class="service-features">
+              <li><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12L3.41 13.41L9 19L21 7L19.59 5.59L9 16.17Z"/></svg> 60-Minute rapid arrival guarantee</li>
+              <li><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12L3.41 13.41L9 19L21 7L19.59 5.59L9 16.17Z"/></svg> Direct insurance carrier billing</li>
+              <li><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12L3.41 13.41L9 19L21 7L19.59 5.59L9 16.17Z"/></svg> Emergency roof tarping & stabilization</li>
+            </ul>
+          </div>
+          <a href="emergency.html" class="btn btn-emergency btn-sm">Emergency Dispatch Page →</a>
+        </div>
+
+        <!-- Service 6 -->
+        <div class="service-card">
+          <div>
+            <div class="service-icon-box">🌴</div>
+            <h3 class="service-title">Exotic & Specimen Tree Care</h3>
+            <p class="service-text">
+              Virginia's specialty arborists for ornamental palms, Japanese maples, legacy magnolias, and heritage oaks requiring delicate pruning and micro-nutrient root feed.
+            </p>
+            <ul class="service-features">
+              <li><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12L3.41 13.41L9 19L21 7L19.59 5.59L9 16.17Z"/></svg> Disease & fungal health diagnosis</li>
+              <li><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12L3.41 13.41L9 19L21 7L19.59 5.59L9 16.17Z"/></svg> Deep root bio-fertilization injection</li>
+              <li><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12L3.41 13.41L9 19L21 7L19.59 5.59L9 16.17Z"/></svg> Winterization & hurricane prep</li>
+            </ul>
+          </div>
+          <a href="#lead-form-anchor" class="btn btn-outline btn-sm">Consult Specimen Arborist →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= WHY WE DOMINATE COMPETITORS ================= -->
+  <section class="section-py section-darker" id="why-us">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Direct Competitor Comparison</span>
+        <h2 class="section-title">Why Virginia Chooses Exotic Tree Service</h2>
+        <p class="section-desc">
+          Compare our credentials, response speed, and equipment directly against Mathias Precision, Calo Tree Experts, and other regional operators.
+        </p>
+      </div>
+
+      <div class="table-responsive">
+        <table class="compare-table">
+          <thead>
+            <tr>
+              <th>Evaluation Metric</th>
+              <th class="col-highlight">🏆 Exotic Tree Service VA</th>
+              <th>Mathias Precision</th>
+              <th>Calo Tree Experts</th>
+              <th>Typical Local Tree Service</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Emergency Response Time</strong></td>
+              <td class="col-highlight"><span class="badge-win">✓ 60-Min Guaranteed</span></td>
+              <td>24-48 Hours (Call Back)</td>
+              <td>Same Day (If available)</td>
+              <td><span class="badge-lose">❌ Days Later</span></td>
+            </tr>
+            <tr>
+              <td><strong>ISA Certified Arborist On Staff</strong></td>
+              <td class="col-highlight"><span class="badge-win">✓ On Every Job</span></td>
+              <td>Certified (Limited)</td>
+              <td>Unverified Crew</td>
+              <td><span class="badge-lose">❌ None</span></td>
+            </tr>
+            <tr>
+              <td><strong>Heavy Crane Equipment</strong></td>
+              <td class="col-highlight"><span class="badge-win">✓ In-House 75-Ton Crane</span></td>
+              <td>Subcontracted Rental</td>
+              <td>Subcontracted Rental</td>
+              <td><span class="badge-lose">❌ Manual Climbing Only</span></td>
+            </tr>
+            <tr>
+              <td><strong>Yard & Lawn Turf Protection</strong></td>
+              <td class="col-highlight"><span class="badge-win">✓ Heavy Composite Mats (Zero Ruts)</span></td>
+              <td>Standard Plywood</td>
+              <td>Rarely Used</td>
+              <td><span class="badge-lose">❌ Deep Tire Ruts</span></td>
+            </tr>
+            <tr>
+              <td><strong>Insurance Direct-Billing</strong></td>
+              <td class="col-highlight"><span class="badge-win">✓ $0 Out-of-Pocket Storm Billing</span></td>
+              <td>Customer Pays Upfront</td>
+              <td>Limited</td>
+              <td><span class="badge-lose">❌ Cash / Check Only</span></td>
+            </tr>
+            <tr>
+              <td><strong>Liability Insurance Policy</strong></td>
+              <td class="col-highlight"><span class="badge-win">✓ $2,000,000 Verified Policy</span></td>
+              <td>$1,000,000 Policy</td>
+              <td>Standard Policy</td>
+              <td><span class="badge-lose">❌ Minimal or Expired</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= BEFORE & AFTER INTERACTIVE SLIDER ================= -->
+  <section class="section-py" id="before-after">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Verified Visual Results</span>
+        <h2 class="section-title">Drag To Reveal The Transformation</h2>
+        <p class="section-desc">
+          Watch hazardous trees and overgrown stumps vanish without leaving a single rut in the lawn.
+        </p>
+      </div>
+
+      <div class="comparison-slider-container">
+        <!-- After Image Layer (Background) -->
+        <div class="after-img-wrap">
+          <svg class="comparison-img" viewBox="0 0 900 480" preserveAspectRatio="none">
+            <defs>
+              <linearGradient id="afterGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#0f3d23"/>
+                <stop offset="60%" stop-color="#1e6b3e"/>
+                <stop offset="100%" stop-color="#155730"/>
+              </linearGradient>
+            </defs>
+            <rect width="900" height="480" fill="url(#afterGrad)"/>
+            <!-- Sun & Clear Blue Sky -->
+            <circle cx="750" cy="90" r="45" fill="#f59e0b" opacity="0.8"/>
+            <path d="M 0 320 Q 250 290 500 320 T 900 310 L 900 480 L 0 480 Z" fill="#2d8e5a"/>
+            <!-- Pristine Lawn with zero stumps -->
+            <text x="700" y="440" fill="#ffffff" font-size="20" font-weight="bold">AFTER: PRISTINE ZERO-DAMAGE LAWN</text>
+          </svg>
+        </div>
+
+        <!-- Before Image Layer (Foreground with draggable divider) -->
+        <div class="before-img-wrap">
+          <svg class="comparison-img" viewBox="0 0 900 480" preserveAspectRatio="none">
+            <defs>
+              <linearGradient id="beforeGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#1e293b"/>
+                <stop offset="60%" stop-color="#334155"/>
+                <stop offset="100%" stop-color="#0f172a"/>
+              </linearGradient>
+            </defs>
+            <rect width="900" height="480" fill="url(#beforeGrad)"/>
+            <!-- Storm Clouds & Leaning Broken Tree -->
+            <path d="M 120 40 Q 200 10 280 40 T 420 40 L 420 120 L 120 120 Z" fill="#475569" opacity="0.6"/>
+            <!-- Broken Tree Structure -->
+            <path d="M 380 450 L 390 280 L 250 140 L 265 130 L 415 270 L 420 450 Z" fill="#78350f"/>
+            <text x="60" y="440" fill="#fca5a5" font-size="20" font-weight="bold">BEFORE: ROTTED LEANING HAZARD</text>
+          </svg>
+        </div>
+
+        <!-- Draggable Handle -->
+        <div class="slider-handle">↔</div>
+        <span class="slider-tag tag-before">BEFORE HAZARD</span>
+        <span class="slider-tag tag-after">AFTER CLEANUP</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= VIRGINIA SERVICE AREAS ================= -->
+  <section class="section-py section-darker" id="service-areas">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Rapid Dispatch Coverage</span>
+        <h2 class="section-title">Serving All Key Virginia Counties</h2>
+        <p class="section-desc">
+          Multiple fully-equipped tree service rigs staged strategically for same-day inspection and emergency deployment.
+        </p>
+      </div>
+
+      <div class="county-grid">
+        <div class="county-card">
+          <div style="font-size: 2rem; margin-bottom: 0.5rem;">📍</div>
+          <div class="county-name">Fairfax County</div>
+          <div class="county-status">● 2 Crews on Standby</div>
+          <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.4rem;">McLean, Great Falls, Reston, Vienna, Herndon</p>
+        </div>
+
+        <div class="county-card">
+          <div style="font-size: 2rem; margin-bottom: 0.5rem;">📍</div>
+          <div class="county-name">Loudoun County</div>
+          <div class="county-status">● 2 Crews on Standby</div>
+          <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.4rem;">Leesburg, Ashburn, Sterling, Purcellville</p>
+        </div>
+
+        <div class="county-card">
+          <div style="font-size: 2rem; margin-bottom: 0.5rem;">📍</div>
+          <div class="county-name">Prince William</div>
+          <div class="county-status">● 1 Crew on Standby</div>
+          <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.4rem;">Manassas, Woodbridge, Gainesville, Haymarket</p>
+        </div>
+
+        <div class="county-card">
+          <div style="font-size: 2rem; margin-bottom: 0.5rem;">📍</div>
+          <div class="county-name">Richmond Metro</div>
+          <div class="county-status">● 2 Crews on Standby</div>
+          <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.4rem;">Henrico, Chesterfield, Midlothian, Glen Allen</p>
+        </div>
+
+        <div class="county-card">
+          <div style="font-size: 2rem; margin-bottom: 0.5rem;">📍</div>
+          <div class="county-name">Arlington & Alexandria</div>
+          <div class="county-status">● Rapid Response Unit</div>
+          <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.4rem;">Old Town, Crystal City, Rosslyn, Del Ray</p>
+        </div>
+
+        <div class="county-card">
+          <div style="font-size: 2rem; margin-bottom: 0.5rem;">📍</div>
+          <div class="county-name">Hampton Roads</div>
+          <div class="county-status">● Storm Unit Available</div>
+          <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.4rem;">Virginia Beach, Norfolk, Chesapeake, Newport News</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 4.9★ GOOGLE REVIEWS & TESTIMONIALS ================= -->
+  <section class="section-py" id="reviews">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Verified Customer Trust</span>
+        <h2 class="section-title">Rated 4.9 Stars Across 180+ Reviews</h2>
+        <p class="section-desc">See why Virginia homeowners and commercial property managers rely on Exotic Tree Service VA.</p>
+      </div>
+
+      <div class="reviews-grid">
+        <div class="review-card">
+          <div>
+            <div class="stars">★★★★★</div>
+            <p class="review-text">
+              "We had a massive 90-foot dead oak dangerously close to our roof in McLean. Two other tree companies said it was too risky or wanted thousands extra. Exotic Tree Service rolled in with their crane and took it down piece by piece. Not a scratch on our deck or gutters!"
+            </p>
+          </div>
+          <div class="reviewer-meta">
+            <div class="reviewer-avatar">DM</div>
+            <div>
+              <div class="reviewer-name">David Montgomery</div>
+              <div class="reviewer-loc">McLean, VA • Verified Homeowner</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="review-card">
+          <div>
+            <div class="stars">★★★★★</div>
+            <p class="review-text">
+              "During the heavy storm last week, a hickory tree split and blocked our entire driveway. I called at 6:30 AM, their emergency crew arrived in 45 minutes, cleared the driveway, and handled the insurance claim directly. Absolute lifesavers!"
+            </p>
+          </div>
+          <div class="reviewer-meta">
+            <div class="reviewer-avatar">KL</div>
+            <div>
+              <div class="reviewer-name">Karen Lindqvist</div>
+              <div class="reviewer-loc">Richmond, VA • Verified Homeowner</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="review-card">
+          <div>
+            <div class="stars">★★★★★</div>
+            <p class="review-text">
+              "Best tree service in Virginia. Their arborist actually explained which trees to prune to keep them healthy rather than just trying to chop everything down. Professional crew, spotless cleanup, and very fair transparent pricing."
+            </p>
+          </div>
+          <div class="reviewer-meta">
+            <div class="reviewer-avatar">RT</div>
+            <div>
+              <div class="reviewer-name">Robert Thorne</div>
+              <div class="reviewer-loc">Ashburn, VA • Property Manager</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FAQ ACCORDION ================= -->
+  <section class="section-py section-darker" id="faq">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Frequently Asked Questions</span>
+        <h2 class="section-title">Everything You Need To Know</h2>
+        <p class="section-desc">Clear answers to tree removal permits, insurance coverage, and yard protection.</p>
+      </div>
+
+      <div class="faq-wrap">
+        <div class="faq-item active">
+          <button class="faq-question">
+            <span>Do I need a permit to remove a tree in Virginia?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            In most Virginia counties (such as Fairfax, Loudoun, and Henrico), residential tree removal on private property does not require a permit unless the tree is located within a designated Chesapeake Bay Preservation Area (RPA) or historic easement. Our ISA Certified Arborists will review your property plat and manage any required county filings.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Will tree removal heavy machinery damage my lawn or driveway?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            Never with Exotic Tree Service VA. We lay heavy-duty AlturnaMATS ground protection plates across every transit route. This distributes vehicle weight evenly, preventing turf gouges, crushed sprinkler heads, or cracked concrete.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Does homeowner insurance cover fallen tree removal?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            Yes! If a tree or heavy limb falls on an insured structure (house, garage, shed, deck, fence, or driveway blockage) due to storm winds, ice, or lightning, homeowner insurance typically covers 100% of the extraction and cleanup cost. We provide zero out-of-pocket direct billing to your insurer.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>What do you do with the wood and tree debris?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            We offer total flexibility: we can chip the branches into rich organic mulch for your garden beds, cut trunk wood into seasoned firewood lengths, or haul everything away leaving your property in immaculate condition.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 100% MOBILE STICKY BOTTOM ACTION BAR ================= -->
+  <div class="mobile-sticky-bar">
+    <div class="mobile-sticky-wrap">
+      <a href="tel:7039918733" class="btn btn-primary" style="font-size: 0.95rem; padding: 0.65rem 0.5rem;">
+        📞 CALL NOW: (703) 991-8733
+      </a>
+      <a href="#lead-form-anchor" class="btn btn-green" style="font-size: 0.9rem; padding: 0.65rem 0.5rem;">
+        ⚡ FAST ESTIMATE
+      </a>
+    </div>
+  </div>
+
+  <!-- ================= SITE FOOTER ================= -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="brand-logo-wrap" style="margin-bottom: 1rem;">
+            <img src="assets/logo.webp" alt="Exotic Tree Service VA Logo" class="brand-logo-img">
+            <div class="brand-text">
+              <div class="brand-title">EXOTIC TREE <span>SERVICE VA</span></div>
+              <div class="brand-sub">ExoticTreeServiceva.com</div>
+            </div>
+          </div>
+          <p style="margin-bottom: 1.25rem;">
+            Virginia's trusted leader in hazardous tree removal, crane-assisted extractions, precision crown pruning, and 24/7 storm disaster relief.
+          </p>
+          <div style="color: var(--brand-gold); font-weight: 700;">
+            Direct Hotline: <a href="tel:7039918733" style="text-decoration: underline;">(703) 991-TREE (8733)</a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Our Services</h4>
+          <ul class="footer-links">
+            <li><a href="#services">Hazardous Tree Removal</a></li>
+            <li><a href="#services">Crane-Assisted Extractions</a></li>
+            <li><a href="#services">Tree Trimming & Pruning</a></li>
+            <li><a href="#services">Stump Grinding & Root Extraction</a></li>
+            <li><a href="emergency.html">24/7 Storm Disaster Response</a></li>
+            <li><a href="#services">Commercial Land Clearing</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Virginia Counties</h4>
+          <ul class="footer-links">
+            <li><a href="#service-areas">Fairfax County</a></li>
+            <li><a href="#service-areas">Loudoun County</a></li>
+            <li><a href="#service-areas">Prince William County</a></li>
+            <li><a href="#service-areas">Richmond Metro</a></li>
+            <li><a href="#service-areas">Arlington & Alexandria</a></li>
+            <li><a href="#service-areas">Hampton Roads</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Staff & Resources</h4>
+          <ul class="footer-links">
+            <li><a href="portal.html" style="color: var(--brand-gold); font-weight: 700;">📋 Company & Employee Portal</a></li>
+            <li><a href="emergency.html" style="color: var(--brand-red); font-weight: 700;">🚨 24/7 Emergency Storm Page</a></li>
+            <li><a href="#calculator">Instant Price Calculator</a></li>
+            <li><a href="#why-us">Competitor Domination Matrix</a></li>
+            <li><span style="color: var(--brand-green-light);">ISA Certified #PR-5921A</span></li>
+            <li><span style="color: var(--text-muted);">VA DPOR License #2705-189204</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>
+          &copy; 2026 ExoticTreeServiceva.com — All Rights Reserved. Licensed, Bonded & Insured.
+        </div>
+        <div>
+          Designed for maximum conversion & competitive dominance.
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/main.js"></script>
+  <script src="js/three-tree.js"></script>
+</body>
+</html>

@@ -2,10 +2,6 @@
   "version": 2,
   "cleanUrls": true,
   "rewrites": [
-    { "source": "/api/leads/:id", "destination": "/api/leads/[id]" },
-    { "source": "/tree-removal", "destination": "/tree-removal.html" },
-    { "source": "/tree-trimming", "destination": "/tree-trimming.html" },
-    { "source": "/emergency", "destination": "/emergency.html" },
-    { "source": "/portal", "destination": "/portal.html" }
+    { "source": "/api/leads/:id", "destination": "/api/leads/[id]" }
   ]
 }

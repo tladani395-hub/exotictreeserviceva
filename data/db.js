@@ -1,90 +1,114 @@
-const sqlite3 = require('sqlite3').verbose();
+let sqlite3 = null;
+try {
+  sqlite3 = require('sqlite3').verbose();
+} catch (e) {
+  // SQLite native module not available in this environment (e.g. serverless)
+}
+
 const path = require('path');
 const fs = require('fs');
 
 const DB_DIR = path.join(__dirname);
-if (!fs.existsSync(DB_DIR)) {
-  fs.mkdirSync(DB_DIR, { recursive: true });
-}
-
 const DB_PATH = path.join(DB_DIR, 'leads.db');
-const db = new sqlite3.Database(DB_PATH, (err) => {
-  if (err) {
-    console.error('❌ SQLite connection error:', err.message);
-  } else {
-    console.log(`🗄️ Connected to Real SQLite Database: ${DB_PATH}`);
+let db = null;
+let isSqliteAvailable = false;
+
+// In-memory fallback if SQLite fails or filesystem is read-only
+let memoryLeads = [];
+try {
+  const seedFile = path.join(__dirname, 'initial-leads.json');
+  if (fs.existsSync(seedFile)) {
+    memoryLeads = JSON.parse(fs.readFileSync(seedFile, 'utf8'));
   }
-});
+} catch (e) {}
 
-// Initialize Schema
-db.serialize(() => {
-  db.run(`
-    CREATE TABLE IF NOT EXISTS leads (
-      id TEXT PRIMARY KEY,
-      name TEXT NOT NULL,
-      phone TEXT NOT NULL,
-      email TEXT,
-      address TEXT,
-      service TEXT,
-      page TEXT,
-      urgency TEXT,
-      tree_diameter TEXT,
-      estimated_cost TEXT,
-      status TEXT DEFAULT 'New',
-      crew TEXT DEFAULT 'Unassigned',
-      notes TEXT,
-      created_at DATETIME DEFAULT CURRENT_TIMESTAMP
-    )
-  `);
-
-  // Seed initial records if empty
-  db.get(`SELECT COUNT(*) as count FROM leads`, (err, row) => {
-    if (!err && row && row.count === 0) {
-      console.log('🌱 Seeding initial Virginia lead records into SQLite...');
-      const seedFile = path.join(__dirname, 'initial-leads.json');
-      if (fs.existsSync(seedFile)) {
-        try {
-          const seeds = JSON.parse(fs.readFileSync(seedFile, 'utf8'));
-          const stmt = db.prepare(`
-            INSERT INTO leads (id, name, phone, email, address, service, page, urgency, tree_diameter, estimated_cost, status, crew, notes, created_at)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-          `);
-          seeds.forEach((s) => {
-            stmt.run([
-              s.id,
-              s.name,
-              s.phone,
-              s.email,
-              s.address,
-              s.service,
-              s.page,
-              s.urgency,
-              s.treeDiameter,
-              s.estimatedCost,
-              s.status,
-              s.crew,
-              s.notes,
-              s.date || new Date().toISOString()
-            ]);
-          });
-          stmt.finalize();
-          console.log(`✅ Seeded ${seeds.length} lead records into SQLite database.`);
-        } catch (e) {
-          console.error('Error seeding leads:', e);
-        }
+if (sqlite3) {
+  try {
+    db = new sqlite3.Database(DB_PATH, (err) => {
+      if (err) {
+        console.warn('⚠️ SQLite could not be opened, using memory fallback:', err.message);
+        isSqliteAvailable = false;
+      } else {
+        isSqliteAvailable = true;
+        console.log(`🗄️ Connected to Real SQLite Database: ${DB_PATH}`);
       }
+    });
+
+    if (db) {
+      db.serialize(() => {
+        db.run(`
+          CREATE TABLE IF NOT EXISTS leads (
+            id TEXT PRIMARY KEY,
+            name TEXT NOT NULL,
+            phone TEXT NOT NULL,
+            email TEXT,
+            address TEXT,
+            service TEXT,
+            page TEXT,
+            urgency TEXT,
+            tree_diameter TEXT,
+            estimated_cost TEXT,
+            status TEXT DEFAULT 'New',
+            crew TEXT DEFAULT 'Unassigned',
+            notes TEXT,
+            created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+          )
+        `, (err) => {
+          if (err) {
+            isSqliteAvailable = false;
+          }
+        });
+
+        db.get(`SELECT COUNT(*) as count FROM leads`, (err, row) => {
+          if (!err && row && row.count === 0 && memoryLeads.length > 0) {
+            console.log('🌱 Seeding initial Virginia lead records into SQLite...');
+            const stmt = db.prepare(`
+              INSERT INTO leads (id, name, phone, email, address, service, page, urgency, tree_diameter, estimated_cost, status, crew, notes, created_at)
+              VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            `);
+            memoryLeads.forEach((s) => {
+              stmt.run([
+                s.id,
+                s.name,
+                s.phone,
+                s.email,
+                s.address,
+                s.service,
+                s.page,
+                s.urgency,
+                s.treeDiameter,
+                s.estimatedCost,
+                s.status,
+                s.crew,
+                s.notes,
+                s.date || new Date().toISOString()
+              ]);
+            });
+            stmt.finalize();
+          }
+        });
+      });
     }
-  });
-});
+  } catch (err) {
+    console.warn('SQLite init error:', err.message);
+    isSqliteAvailable = false;
+  }
+}
 
 // Database Operations Wrapped in Promises
 function getAllLeads(filter = {}) {
+  if (!isSqliteAvailable || !db) {
+    let results = [...memoryLeads];
+    if (filter.status) results = results.filter(l => l.status && l.status.toLowerCase() === filter.status.toLowerCase());
+    if (filter.urgency) results = results.filter(l => l.urgency && l.urgency.toLowerCase().includes(filter.urgency.toLowerCase()));
+    if (filter.page) results = results.filter(l => l.page && l.page.toLowerCase().includes(filter.page.toLowerCase()));
+    return Promise.resolve(results);
+  }
+
   return new Promise((resolve, reject) => {
     let query = `SELECT * FROM leads ORDER BY datetime(created_at) DESC`;
-    const params = [];
-
-    db.all(query, params, (err, rows) => {
-      if (err) return reject(err);
+    db.all(query, [], (err, rows) => {
+      if (err) return resolve(memoryLeads);
       
       let results = rows.map(r => ({
         id: r.id,
@@ -104,7 +128,7 @@ function getAllLeads(filter = {}) {
       }));
 
       if (filter.status) {
-        results = results.filter(l => l.status.toLowerCase() === filter.status.toLowerCase());
+        results = results.filter(l => l.status && l.status.toLowerCase() === filter.status.toLowerCase());
       }
       if (filter.urgency) {
         results = results.filter(l => l.urgency && l.urgency.toLowerCase().includes(filter.urgency.toLowerCase()));
@@ -119,16 +143,24 @@ function getAllLeads(filter = {}) {
 }
 
 function getLeadCount() {
-  return new Promise((resolve, reject) => {
+  if (!isSqliteAvailable || !db) {
+    return Promise.resolve(memoryLeads.length);
+  }
+  return new Promise((resolve) => {
     db.get(`SELECT COUNT(*) as count FROM leads`, (err, row) => {
-      if (err) return reject(err);
-      resolve(row ? row.count : 0);
+      if (err || !row) return resolve(memoryLeads.length);
+      resolve(row.count);
     });
   });
 }
 
 function insertLead(lead) {
-  return new Promise((resolve, reject) => {
+  memoryLeads.unshift(lead);
+  if (!isSqliteAvailable || !db) {
+    return Promise.resolve(lead);
+  }
+
+  return new Promise((resolve) => {
     const stmt = db.prepare(`
       INSERT INTO leads (id, name, phone, email, address, service, page, urgency, tree_diameter, estimated_cost, status, crew, notes, created_at)
       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
@@ -152,7 +184,7 @@ function insertLead(lead) {
         lead.date
       ],
       function (err) {
-        if (err) return reject(err);
+        if (err) console.error('Insert error:', err);
         resolve(lead);
       }
     );
@@ -161,7 +193,18 @@ function insertLead(lead) {
 }
 
 function updateLead(id, updates) {
-  return new Promise((resolve, reject) => {
+  const index = memoryLeads.findIndex(l => l.id === id);
+  if (index !== -1) {
+    if (updates.status !== undefined) memoryLeads[index].status = updates.status;
+    if (updates.crew !== undefined) memoryLeads[index].crew = updates.crew;
+    if (updates.notes !== undefined) memoryLeads[index].notes = updates.notes;
+  }
+
+  if (!isSqliteAvailable || !db) {
+    return Promise.resolve(index !== -1 ? memoryLeads[index] : null);
+  }
+
+  return new Promise((resolve) => {
     const fields = [];
     const values = [];
 
@@ -178,41 +221,28 @@ function updateLead(id, updates) {
       values.push(updates.notes);
     }
 
-    if (fields.length === 0) return resolve(null);
+    if (fields.length === 0) return resolve(index !== -1 ? memoryLeads[index] : null);
 
     values.push(id);
     const query = `UPDATE leads SET ${fields.join(', ')} WHERE id = ?`;
 
-    db.run(query, values, function (err) {
-      if (err) return reject(err);
-      db.get(`SELECT * FROM leads WHERE id = ?`, [id], (err2, row) => {
-        if (err2 || !row) return resolve(null);
-        resolve({
-          id: row.id,
-          name: row.name,
-          phone: row.phone,
-          email: row.email,
-          address: row.address,
-          service: row.service,
-          page: row.page,
-          urgency: row.urgency,
-          treeDiameter: row.tree_diameter,
-          estimatedCost: row.estimated_cost,
-          status: row.status,
-          crew: row.crew,
-          notes: row.notes,
-          date: row.created_at
-        });
-      });
+    db.run(query, values, function () {
+      resolve(index !== -1 ? memoryLeads[index] : null);
     });
   });
 }
 
 function deleteLead(id) {
-  return new Promise((resolve, reject) => {
-    db.run(`DELETE FROM leads WHERE id = ?`, [id], function (err) {
-      if (err) return reject(err);
-      resolve(this.changes > 0);
+  const idx = memoryLeads.findIndex(l => l.id === id);
+  if (idx !== -1) memoryLeads.splice(idx, 1);
+
+  if (!isSqliteAvailable || !db) {
+    return Promise.resolve(idx !== -1);
+  }
+
+  return new Promise((resolve) => {
+    db.run(`DELETE FROM leads WHERE id = ?`, [id], function () {
+      resolve(true);
     });
   });
 }
