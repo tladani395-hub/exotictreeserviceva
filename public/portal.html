@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Staff & Company Dispatch Portal | Exotic Tree Service VA</title>
+  <link rel="icon" type="image/webp" href="assets/logo.webp">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="theme-emerald">
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container nav-wrapper">
+      <a href="index.html" class="brand-logo-wrap">
+        <img src="assets/logo.webp" alt="Exotic Tree Service VA Logo" class="brand-logo-img">
+        <div class="brand-text">
+          <div class="brand-title">EXOTIC TREE <span>PORTAL</span></div>
+          <div class="brand-sub">COMPANY, CREW & LEAD DISPATCH CRM</div>
+        </div>
+      </a>
+
+      <div class="nav-actions">
+        <a href="index.html" class="btn btn-outline btn-sm">🌿 View Page 1</a>
+        <a href="emergency.html" class="btn btn-emergency btn-sm">⚡ View Page 2</a>
+        <button class="theme-toggle-btn">🎨 <span class="theme-label-text">Theme</span></button>
+      </div>
+    </div>
+  </header>
+
+  <main class="portal-wrap">
+    <div class="container">
+      
+      <!-- Top Title & Controls -->
+      <div class="portal-nav-bar">
+        <div>
+          <h1 style="font-size: 1.85rem; font-weight: 900;">Lead Management & Emergency Dispatch</h1>
+          <p style="color: var(--text-secondary); font-size: 0.95rem;">
+            Real-time feed of website quote submissions, emergency hotline requests, and scheduled jobs.
+          </p>
+        </div>
+        <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+          <button id="btn-open-intake" class="btn btn-primary btn-sm">
+            ➕ Log Phone Call Intake
+          </button>
+          <button id="btn-export-csv" class="btn btn-outline btn-sm">
+            📥 Export CSV (Excel)
+          </button>
+          <button id="btn-refresh-leads" class="btn btn-outline btn-sm">
+            🔄 Refresh Feed
+          </button>
+        </div>
+      </div>
+
+      <!-- KPI Statistics Cards -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-label">Total Inbound Leads</div>
+          <div class="stat-num" id="stat-total">--</div>
+          <div style="font-size: 0.78rem; color: var(--brand-green-light);">From both landing pages</div>
+        </div>
+
+        <div class="stat-card" style="border-color: rgba(239, 68, 68, 0.4);">
+          <div class="stat-label" style="color: #fca5a5;">🚨 Critical Emergencies</div>
+          <div class="stat-num" id="stat-urgent" style="color: #ef4444;">--</div>
+          <div style="font-size: 0.78rem; color: #fca5a5;">60-Min dispatch required</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Active Dispatched Crews</div>
+          <div class="stat-num" id="stat-active" style="color: var(--brand-green-light);">--</div>
+          <div style="font-size: 0.78rem; color: var(--text-muted);">En route / On site</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Estimated Pipeline Value</div>
+          <div class="stat-num" id="stat-pipeline" style="color: var(--brand-gold);">$28,500</div>
+          <div style="font-size: 0.78rem; color: var(--brand-gold);">Active quotes in progress</div>
+        </div>
+      </div>
+
+      <!-- Filters & Search -->
+      <div class="portal-controls">
+        <div class="filter-btn-group">
+          <button class="filter-btn active" data-filter="all">All Submissions</button>
+          <button class="filter-btn" data-filter="urgent" style="color: #fca5a5;">🚨 Emergencies Only</button>
+          <button class="filter-btn" data-filter="new">New Inquiries</button>
+          <button class="filter-btn" data-filter="dispatched">Dispatched / In Progress</button>
+          <button class="filter-btn" data-filter="completed">Completed</button>
+        </div>
+
+        <div>
+          <input type="text" id="portal-search" class="form-control" placeholder="Search customer, phone, or town..." style="max-width: 280px; padding: 0.4rem 0.8rem; font-size: 0.85rem;">
+        </div>
+      </div>
+
+      <!-- Leads Table -->
+      <div class="table-responsive">
+        <table class="leads-table">
+          <thead>
+            <tr>
+              <th>Lead ID & Date</th>
+              <th>Customer Info</th>
+              <th>Service & Hazard Level</th>
+              <th>Property Location</th>
+              <th>Estimated Cost</th>
+              <th>Status</th>
+              <th>Assigned Crew</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="leads-tbody">
+            <tr>
+              <td colspan="8" style="text-align: center; padding: 2rem; color: var(--text-muted);">
+                Loading live leads from database...
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ================= MODAL: LOG PHONE INTAKE LEAD ================= -->
+  <div id="intake-modal" style="display: none; position: fixed; inset: 0; z-index: 99999; background: rgba(0,0,0,0.85); backdrop-filter: blur(8px); align-items: center; justify-content: center; padding: 1rem;">
+    <div style="background: var(--bg-surface); border: 2px solid var(--brand-green); border-radius: var(--radius-lg); padding: 2rem; max-width: 550px; width: 100%; box-shadow: var(--shadow-lg);">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem;">
+        <h3 style="font-size: 1.35rem; font-weight: 800;">Log Phone Call / Office Intake</h3>
+        <button id="btn-close-intake" style="background: none; border: none; color: #fff; font-size: 1.5rem; cursor: pointer;">✕</button>
+      </div>
+
+      <form id="intake-form">
+        <div class="form-group">
+          <label class="form-label">Customer Name *</label>
+          <input type="text" id="intake-name" class="form-control" required>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Phone Number *</label>
+            <input type="tel" id="intake-phone" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Email</label>
+            <input type="email" id="intake-email" class="form-control">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Property Address & VA City *</label>
+          <input type="text" id="intake-address" class="form-control" placeholder="e.g. 1204 Main St, Fairfax, VA" required>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Service Type</label>
+            <select id="intake-service" class="form-control">
+              <option value="Emergency Tree Removal">Emergency Tree Removal</option>
+              <option value="Standard Tree Removal">Standard Tree Removal</option>
+              <option value="Crane-Assisted Removal">Crane-Assisted Removal</option>
+              <option value="Trimming & Pruning">Trimming & Pruning</option>
+              <option value="Stump Grinding">Stump Grinding</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Urgency Priority</label>
+            <select id="intake-urgency" class="form-control">
+              <option value="Immediate Hazard (On Roof/Structure)">Immediate Emergency (On Structure)</option>
+              <option value="Within 24 Hours">Urgent (Within 24 Hours)</option>
+              <option value="Standard Inspection">Standard Inspection (2-3 Days)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Dispatcher Notes</label>
+          <textarea id="intake-notes" class="form-control" rows="2" placeholder="Caller details, gate code, tree location..."></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-green btn-lg" style="width: 100%;">
+          💾 Save & Create Lead Record
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <script src="js/main.js"></script>
+  <script src="js/portal.js"></script>
+</body>
+</html>

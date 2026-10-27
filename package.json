@@ -1,0 +1,23 @@
+{
+  "name": "exotictreeserviceva",
+  "version": "1.0.0",
+  "description": "High-Converting Website for ExoticTreeServiceva.com with Dual Landing Pages, 3D Animations, and Lead Dispatch CRM",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "keywords": [
+    "tree-service",
+    "virginia-tree-removal",
+    "emergency-tree-service",
+    "exotic-tree-care"
+  ],
+  "author": "Exotic Tree Service VA",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "sqlite3": "^6.0.1"
+  }
+}
