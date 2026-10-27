@@ -237,16 +237,20 @@ app.get('/portal', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'portal.html'));
 });
 
-// Start Server
-app.listen(PORT, () => {
-  console.log(`=======================================================`);
-  console.log(`🌲 Exotic Tree Service VA Web Platform Active`);
-  console.log(`🗄️ Real Database: SQLite (data/leads.db)`);
-  console.log(`🌐 Live at: http://localhost:${PORT}`);
-  console.log(`🪓 Service 1 (Tree Removal):   http://localhost:${PORT}/tree-removal`);
-  console.log(`✂️ Service 2 (Tree Trimming):  http://localhost:${PORT}/tree-trimming`);
-  console.log(`⚡ Emergency (24/7 Storm):     http://localhost:${PORT}/emergency`);
-  console.log(`🌿 Flagship (Interactive Hub): http://localhost:${PORT}/index.html`);
-  console.log(`📋 Staff Dispatch CRM:        http://localhost:${PORT}/portal`);
-  console.log(`=======================================================`);
-});
+// Start Server if not loaded as a module / serverless function
+if (process.env.NODE_ENV !== 'test' && !process.env.VERCEL) {
+  app.listen(PORT, () => {
+    console.log(`=======================================================`);
+    console.log(`🌲 Exotic Tree Service VA Web Platform Active`);
+    console.log(`🗄️ Real Database: SQLite (data/leads.db)`);
+    console.log(`🌐 Live at: http://localhost:${PORT}`);
+    console.log(`🪓 Service 1 (Tree Removal):   http://localhost:${PORT}/tree-removal`);
+    console.log(`✂️ Service 2 (Tree Trimming):  http://localhost:${PORT}/tree-trimming`);
+    console.log(`⚡ Emergency (24/7 Storm):     http://localhost:${PORT}/emergency`);
+    console.log(`🌿 Flagship (Interactive Hub): http://localhost:${PORT}/index.html`);
+    console.log(`📋 Staff Dispatch CRM:        http://localhost:${PORT}/portal`);
+    console.log(`=======================================================`);
+  });
+}
+
+module.exports = app;

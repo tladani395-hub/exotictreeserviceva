@@ -1,39 +1,11 @@
 {
   "version": 2,
-  "builds": [
-    {
-      "src": "server.js",
-      "use": "@vercel/node"
-    },
-    {
-      "src": "public/**",
-      "use": "@vercel/static"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/api/(.*)",
-      "dest": "server.js"
-    },
-    {
-      "src": "/tree-removal",
-      "dest": "/tree-removal.html"
-    },
-    {
-      "src": "/tree-trimming",
-      "dest": "/tree-trimming.html"
-    },
-    {
-      "src": "/emergency",
-      "dest": "/emergency.html"
-    },
-    {
-      "src": "/portal",
-      "dest": "/portal.html"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/public/$1"
-    }
+  "cleanUrls": true,
+  "rewrites": [
+    { "source": "/api/leads/:id", "destination": "/api/leads/[id]" },
+    { "source": "/tree-removal", "destination": "/tree-removal.html" },
+    { "source": "/tree-trimming", "destination": "/tree-trimming.html" },
+    { "source": "/emergency", "destination": "/emergency.html" },
+    { "source": "/portal", "destination": "/portal.html" }
   ]
 }
